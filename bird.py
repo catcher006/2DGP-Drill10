@@ -22,8 +22,8 @@ FRAMES_PER_ACTION = 8
 
 class Fly:
 
-    def __init__(self, boy):
-        self.boy = boy
+    def __init__(self, bird):
+        self.bird = bird
 
     def enter(self, e):
         pass
@@ -32,17 +32,17 @@ class Fly:
         pass
 
     def do(self):
-        self.boy.frame = (self.boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME *game_framework.frame_time) % 8
+        self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME *game_framework.frame_time) % 8
 
 
     def handle_event(self, event):
         pass
 
     def draw(self):
-        if self.boy.face_dir == 1:
-            self.boy.image.clip_composite_draw(int(self.boy.frame) * 100, 300, 100, 100, 3.141592/2, '', self.boy.x - 25, self.boy.y - 25, 100, 100)
+        if self.bird.face_dir == 1:
+            self.bird.image.clip_composite_draw(int(self.bird.frame) * 100, 300, 100, 100, 3.141592/2, '', self.bird.x - 25, self.bird.y - 25, 100, 100)
         else:
-            self.boy.image.clip_composite_draw(int(self.boy.frame) * 100, 200, 100, 100, -3.141592/2, '', self.boy.x + 25, self.boy.y - 25, 100, 100)
+            self.bird.image.clip_composite_draw(int(self.bird.frame) * 100, 200, 100, 100, -3.141592/2, '', self.bird.x + 25, self.bird.y - 25, 100, 100)
 
 
 
@@ -51,15 +51,18 @@ class Bird:
 
         self.item = None
 
-        self.x, self.y = 400, 90
+        self.x, self.y = 50, 500
         self.frame = 0
         self.face_dir = 1
         self.dir = 0
-        self.image = load_image('animation_sheet.png')
+        self.image = load_image('bird_animation.png')
         self.font = load_font('ENCR10B.TTF', 16)
 
         self.FLY = Fly(self)
-        self.state_machine = StateMachine(self.FLY)
+        self.state_machine = StateMachine(
+            self.FLY,
+            {}
+        )
 
 
 
@@ -74,8 +77,3 @@ class Bird:
     def draw(self):
         self.state_machine.draw()
         self.font.draw(self.x - 60, self.y + 50, f'(Time: {get_time():.2f})', (255, 255, 0))
-
-
-    def fire_ball(self):
-        ball = Ball(self.x, self.y, self.face_dir * 20, 30)
-        game_world.add_object(ball)
