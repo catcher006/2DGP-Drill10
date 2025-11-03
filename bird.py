@@ -33,6 +33,10 @@ class Fly:
 
     def do(self):
         self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
+        self.bird.x += self.bird.dir * RUN_SPEED_PPS * game_framework.frame_time
+        if (self.bird.x < 25) or (self.bird.x > 1600 - 25):
+            self.bird.dir *= -1
+            self.bird.face_dir *= -1
 
 
     def handle_event(self, event):
@@ -53,7 +57,7 @@ class Bird:
         self.x, self.y = 400, 500
         self.frame = 0
         self.face_dir = 1
-        self.dir = 0
+        self.dir = 1
         self.image = load_image('bird_animation.png')
         self.font = load_font('ENCR10B.TTF', 16)
 
@@ -75,4 +79,4 @@ class Bird:
 
     def draw(self):
         self.state_machine.draw()
-        self.font.draw(self.x - 60, self.y + 50, f'(Time: {get_time():.2f})', (255, 255, 0))
+        self.font.draw(self.x - 80, self.y + 20, f'(Time: {get_time():.2f})', (255, 255, 0))
