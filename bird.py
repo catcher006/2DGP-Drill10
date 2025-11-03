@@ -36,7 +36,7 @@ class Fly:
     def do(self):
         self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
         self.bird.x += self.bird.dir * RUN_SPEED_PPS * game_framework.frame_time
-        if (self.bird.x < 25) or (self.bird.x > 1600 - 25):
+        if (self.bird.x < 50) or (self.bird.x > 1600 - 50):
             self.bird.dir *= -1
             self.bird.face_dir *= -1
 
@@ -58,7 +58,7 @@ class Bird:
 
         self.item = None
 
-        self.x, self.y = random.randrange(30, 300), random.randrange(350, 550)
+        self.x, self.y = random.randrange(100, 400), random.randrange(350, 550)
         self.frame = random.randrange(0, FRAMES_PER_ACTION)
         self.face_dir = 1
         self.dir = 1
