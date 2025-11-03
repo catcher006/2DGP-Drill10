@@ -32,7 +32,7 @@ class Fly:
         pass
 
     def do(self):
-        self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME *game_framework.frame_time) % 8
+        self.bird.frame = (self.bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME *game_framework.frame_time) % 14
 
 
     def handle_event(self, event):
@@ -40,9 +40,7 @@ class Fly:
 
     def draw(self):
         if self.bird.face_dir == 1:
-            self.bird.image.clip_composite_draw(int(self.bird.frame) * 100, 300, 100, 100, 3.141592/2, '', self.bird.x - 25, self.bird.y - 25, 100, 100)
-        else:
-            self.bird.image.clip_composite_draw(int(self.bird.frame) * 100, 200, 100, 100, -3.141592/2, '', self.bird.x + 25, self.bird.y - 25, 100, 100)
+            self.bird.image.clip_composite_draw((int(self.bird.frame) % 5) * 183, (int(self.bird.frame) // 5) * 168, 183, 168, 3.141592/4, '', self.bird.x - 25, self.bird.y - 25, 100, 100)
 
 
 
