@@ -44,7 +44,9 @@ class Fly:
 
     def draw(self):
         if self.bird.face_dir == 1:
-            self.bird.image.clip_composite_draw((int(self.bird.frame) % 5) * 183, (2- int(self.bird.frame) // 5) * 168, 183, 168, 3.141592/4, '', self.bird.x - 25, self.bird.y - 25, 100, 100)
+            self.bird.image.clip_composite_draw((int(self.bird.frame) % 5) * 183, (2- int(self.bird.frame) // 5) * 168, 183, 168, 3.141592/5, '', self.bird.x - 25, self.bird.y - 25, 100, 100)
+        else:
+            self.bird.image.clip_composite_draw((int(self.bird.frame) % 5) * 183, (2 - int(self.bird.frame) // 5) * 168, 183, 168, 3.141592/1, 'v', self.bird.x + 25, self.bird.y - 25, 100, 100)
             # print(f'Frame: {self.bird.frame:.2f}, Clip X: {(int(self.bird.frame) % 5) * 183}, Clip Y: {(2 - int(self.bird.frame) // 5) * 168}')
 
 
